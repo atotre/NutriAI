@@ -343,28 +343,28 @@ with st.sidebar:
             options=["None", "Halal", "Kosher", "Hindu Vegetarian", "Jain (Strict Vegetarian)"]
         )
 
-# 1. This 'if' must have exactly 4 spaces before it
-    if st.form_submit_button("Generate Plan", type="primary", use_container_width=True):
-        processed_allergies = [a for a in m_allergies if a != "None"]
-        processed_conditions = [c for c in m_conditions if c != "None"]
-        st.session_state.active_allergies = processed_allergies
-        st.session_state.active_conditions = processed_conditions
-        st.session_state.active_diet = m_diet
-        st.session_state.current_name = m_name
-        run_pipeline({
-            "name": m_name,
-            "age": int(m_age),
-            "sex": m_sex,
-            "allergies": processed_allergies,
-            "conditions": processed_conditions,
-            "is_vegan": m_diet == "Vegan",
-            "is_vegetarian": m_diet in ("Vegetarian", "Vegan"),
-            "is_pescatarian": m_diet == "Pescatarian",
-            "religious_constraint": religious_constraint,
-        })
-        st.rerun()
+# Ensure this block has an extra level of indentation to stay inside 'with st.form(...):'
+        if st.form_submit_button("Generate Plan", type="primary", use_container_width=True):
+            processed_allergies = [a for a in m_allergies if a != "None"]
+            processed_conditions = [c for c in m_conditions if c != "None"]
+            st.session_state.active_allergies = processed_allergies
+            st.session_state.active_conditions = processed_conditions
+            st.session_state.active_diet = m_diet
+            st.session_state.current_name = m_name
+            run_pipeline({
+                "name": m_name,
+                "age": int(m_age),
+                "sex": m_sex,
+                "allergies": processed_allergies,
+                "conditions": processed_conditions,
+                "is_vegan": m_diet == "Vegan",
+                "is_vegetarian": m_diet in ("Vegetarian", "Vegan"),
+                "is_pescatarian": m_diet == "Pescatarian",
+                "religious_constraint": religious_constraint,
+            })
+            st.rerun()
 
-    # 2. This 'if' must ALSO have exactly 4 spaces before it to match!
+    # The timer block stays here (un-indented by one level), right outside the form
     if st.session_state.gen_time is not None:
         st.divider()
         t = st.session_state.gen_time
@@ -376,7 +376,7 @@ with st.sidebar:
             f" &nbsp;·&nbsp; {status}</div>",
             unsafe_allow_html=True,
         )
-        
+
 # ─────────────────────────────────────────────────────────────────────────────
 # MAIN PANEL — guard until a plan is generated
 # ─────────────────────────────────────────────────────────────────────────────
