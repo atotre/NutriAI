@@ -344,29 +344,29 @@ with st.sidebar:
         )
 
 if st.form_submit_button("Generate Plan", type="primary", use_container_width=True):
-            processed_allergies = [a for a in m_allergies if a != "None"]
-            processed_conditions = [c for c in m_conditions if c != "None"]
+        processed_allergies = [a for a in m_allergies if a != "None"]
+        processed_conditions = [c for c in m_conditions if c != "None"]
 
-            # 🌟 PASTE THIS HERE: Save current UI sidebar filters to session state memory
-            st.session_state.active_allergies = processed_allergies
-            st.session_state.active_conditions = processed_conditions
-            st.session_state.active_diet = m_diet
-            st.session_state.current_name = m_name
+        # 🌟 Save current UI sidebar filters to session state memory
+        st.session_state.active_allergies = processed_allergies
+        st.session_state.active_conditions = processed_conditions
+        st.session_state.active_diet = m_diet
+        st.session_state.current_name = m_name
 
-            run_pipeline({
-                "name": m_name,
-                "age": int(m_age),
-                "sex": m_sex,
-                "allergies": processed_allergies,
-                "conditions": processed_conditions,
-                "is_vegan": m_diet == "Vegan",
-                "is_vegetarian": m_diet in ("Vegetarian", "Vegan"),
-                "is_pescatarian": m_diet == "Pescatarian",
-                "religious_constraint": religious_constraint,
-            })
-            st.rerun()
+        run_pipeline({
+            "name": m_name,
+            "age": int(m_age),
+            "sex": m_sex,
+            "allergies": processed_allergies,
+            "conditions": processed_conditions,
+            "is_vegan": m_diet == "Vegan",
+            "is_vegetarian": m_diet in ("Vegetarian", "Vegan"),
+            "is_pescatarian": m_diet == "Pescatarian",
+            "religious_constraint": religious_constraint,
+        })
+        st.rerun()
 
-    # Generation timer (Aligned with exactly 4 spaces to sit inside the sidebar, but outside the custom_profile form)
+    # Generation timer (Perfectly aligned outside the if statement above)
     if st.session_state.gen_time is not None:
         st.divider()
         t = st.session_state.gen_time
@@ -378,7 +378,6 @@ if st.form_submit_button("Generate Plan", type="primary", use_container_width=Tr
             f" &nbsp;·&nbsp; {status}</div>",
             unsafe_allow_html=True,
         )
-
 
 # ─────────────────────────────────────────────────────────────────────────────
 # MAIN PANEL — guard until a plan is generated
