@@ -699,7 +699,7 @@ with tab_nutrients:
 # TAB 3 — Explain Exclusions
 # ════════════════════════════════════════════════════════════════════════════
 
-with tab3:
+with tab_explain:
     st.subheader("🕵️‍♂️ Exclusion Explanation Engine")
     st.markdown(
         "Every meal rejected from the full database is logged here with a precise clinical or dietary reason."
