@@ -690,7 +690,7 @@ with tab_nutrients:
         return "background-color:#1a3328; color:#a6e3a1"
 
     st.dataframe(
-        heat_df.style.applymap(_cell_style).format("{:.0%}"),
+        heat_df.style.map(_cell_style).format("{:.0%}"),
         use_container_width=True,
     )
 
